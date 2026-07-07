@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarhatTube - Reklamsız Deneyim</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        .video-container {
+            width: 80%;
+            max-width: 800px;
+            height: 450px;
+            background-color: #222;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid red;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FarhatTube Platformuna Hoş Geldiniz</h1>
+    <p>Bu altyapıda harici reklam ağları ve izleyiciler engellenmiştir.</p>
+
+    <div class="video-container">
+        <!-- Buraya ileride kendi video oynatıcınızı veya kodunuzu ekleyebilirsiniz -->
+        <p>Video Oynatıcı Alanı (Reklamlar Engellendi)</p>
+    </div>
+
+    <script>
+        // Basit reklam engelleme kontrol ve temizleme simülasyonu
+        console.log("FarhatTube güvenli ve reklamsız mod aktif.");
+        
+        // Sayfaya sızmaya çalışan harici reklam scriptlerini tespit etme fonksiyonu
+        window.addEventListener('DOMContentLoaded', () => {
+            const reklamElementleri = document.querySelectorAll('.ads, .ad-banner, #reklam');
+            reklamElementleri.forEach(el => el.remove());
+        });
+    </script>
+</body>
+</html>
