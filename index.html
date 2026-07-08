@@ -1,12 +1,12 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarhatTube - Reklamsız & Güvenli Video Platformu</title>
+    <title>FarhatTube - Reklamsız Deneyim</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #111;
             color: white;
             text-align: center;
@@ -25,7 +25,6 @@
             font-size: 24px;
             font-weight: bold;
             color: red;
-            letter-spacing: 1px;
         }
         .auth-buttons button {
             background-color: red;
@@ -35,96 +34,106 @@
             margin-left: 10px;
             cursor: pointer;
             font-weight: bold;
-            border-radius: 5px;
-        }
-        .auth-buttons button:hover {
-            background-color: darkred;
+            border-radius: 4px;
         }
         .login-box {
             background-color: #222;
-            max-width: 350px;
-            margin: 40px auto;
+            max-width: 400px;
+            margin: 50px auto;
             padding: 30px;
             border-radius: 8px;
             border: 1px solid #333;
-            display: none; /* Giriş butonuna basınca açılacak */
         }
-        .login-box h3 { margin-top: 0; color: red; }
+        .login-box h2 {
+            margin-top: 0;
+        }
         .login-box input {
             width: 90%;
             padding: 10px;
             margin: 10px 0;
-            border-radius: 4px;
-            border: 1px solid #444;
             background-color: #333;
+            border: 1px solid #444;
             color: white;
+            border-radius: 4px;
+        }
+        .login-box button {
+            width: 95%;
+            padding: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        #message-area {
+            margin-top: 20px;
+            font-size: 18px;
         }
         .video-container {
-            width: 80%;
             max-width: 800px;
-            height: 450px;
-            background-color: #222;
             margin: 30px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px dashed #444;
-            border-radius: 10px;
+            display: none;
+        }
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: 2px solid red;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Üst Menü ve Hesap Butonları -->
     <div class="header">
-        <div class="logo">FARHATTUBE</div>
+        <div class="logo">FarhatTube</div>
         <div class="auth-buttons">
             <button onclick="toggleLogin()">Giriş Yap</button>
-            <button onclick="toggleLogin()">Kayıt Ol</button>
         </div>
     </div>
 
-    <!-- Dinamik Giriş/Hesap Paneli -->
-    <div class="login-box" id="loginBox">
-        <h3 id="boxTitle">FarhatTube Hesabı Oluştur</h3>
-        <input type="text" id="username" placeholder="Kullanıcı Adı veya E-posta">
+    <div id="login-box" class="login-box">
+        <h2>Platforma Giriş</h2>
+        <input type="text" id="username" placeholder="Kullanıcı Adı">
         <input type="password" id="password" placeholder="Şifre">
-        <button style="background-color:red; color:white; border:none; padding:10px 20px; cursor:pointer; width:100%; border-radius:4px; font-weight:bold;" onclick="accountAction()">Onayla</button>
+        <button onclick="accountAction()">Giriş Yap</button>
     </div>
 
-    <h2 style="margin-top:40px;">FarhatTube Platformuna Hoş Geldiniz</h2>
-    <p>Reklamsız, kesintisiz ve güvenli video izleme deneyimi.</p>
+    <div id="message-area"></div>
 
-    <div class="video-container">
-        <p id="videoStatus">Lütfen video oynatıcıyı aktifleştirmek için giriş yapın.</p>
-    </div>
+    <div id="video-area" class="video-container"></div>
 
     <script>
-        // Giriş kutusunu açıp kapatan fonksiyon
         function toggleLogin() {
-            const box = document.getElementById('loginBox');
-            box.style.display = box.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Giriş yapıldığında simüle eden fonksiyon
-        function accountAction() {
-            const user = document.getElementById('username').value;
-            if(user) {
-                alert("FarhatTube Hesabınıza Başarıyla Giriş Yapıldı: " + user);
-                document.getElementById('loginBox').style.display = 'none';
-[7.07.2026 22:37] Farhat Jepbarov: document.getElementById('videoStatus').innerHTML = "🎥 Video Oynatıcı Hazır (Reklamlar Engellendi)";
-                document.querySelector('.auth-buttons').innerHTML = <span style='color:green; font-weight:bold;'>Hoş geldin, ${user}!</span>;
+            var box = document.getElementById('login-box');
+            if(box.style.display === 'none') {
+                box.style.display = 'block';
             } else {
-                alert("Lütfen alanları doldurun.");
+                box.style.display = 'none';
             }
         }
 
-        // Reklam engelleme temizliği
-        window.addEventListener('DOMContentLoaded', () => {
-            const ads = document.querySelectorAll('.ads, .ad-banner, #reklam');
-            ads.forEach(el => el.remove());
-            console.log("FarhatTube Reklam Filtreleri Devrede.");
-        });
+        function accountAction() {
+            var user = document.getElementById('username').value;
+            var pass = document.getElementById('password').value;
+            
+            if(user === "" || pass === "") {
+                alert("Lütfen tüm alanları doldurun!");
+                return;
+            }
+
+            document.getElementById('login-box').style.display = 'none';
+            
+            var msgArea = document.getElementById('message-area');
+            msgArea.innerHTML = "<span style='color:green; font-weight:bold;'>Giriş Başarılı! FarhatTube Platformuna Hoş Geldiniz</span>";
+            
+            var videoArea = document.getElementById('video-area');
+            videoArea.style.display = 'block';
+            // İŞTE YOUTUBE ENGELİNİ KALDIRAN KESİN DEĞİŞİKLİK BURADA USTA:
+            videoArea.innerHTML = '<iframe src="https://youtube.com" allowfullscreen></iframe>';
+        }
     </script>
+
 </body>
 </html>
