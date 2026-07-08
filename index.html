@@ -76,15 +76,13 @@
             margin: 30px auto;
             display: none;
         }
-        #player {
+        iframe {
             width: 100%;
             height: 450px;
             border: 2px solid red;
             border-radius: 8px;
         }
     </style>
-    <!-- YouTube Resmi Altyapı Kütüphanesi -->
-    <script src="https://youtube.com"></script>
 </head>
 <body>
 
@@ -104,31 +102,12 @@
 
     <div id="message-area"></div>
 
-    <div id="video-area" class="video-container">
-        <div id="player"></div>
-    </div>
+    <div id="video-area" class="video-container"></div>
 
     <script>
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '450',
-                width: '100%',
-                videoId: 'tgbNymZ7vqY', // Kesin çalışan örnek video kodu
-                playerVars: {
-                    'playsinline': 1,
-                    'rel': 0
-                }
-            });
-        }
-
         function toggleLogin() {
             var box = document.getElementById('login-box');
-            if(box.style.display === 'none') {
-                box.style.display = 'block';
-            } else {
-                box.style.display = 'none';
-            }
+            box.style.display = (box.style.display === 'none') ? 'block' : 'none';
         }
 
         function accountAction() {
@@ -147,6 +126,8 @@
             
             var videoArea = document.getElementById('video-area');
             videoArea.style.display = 'block';
+            // Doğrudan çalışan ve engellenmeyen temiz oynatıcı linki
+            videoArea.innerHTML = '<iframe src="https://youtube-nocookie.com" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         }
     </script>
 
